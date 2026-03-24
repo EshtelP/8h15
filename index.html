@@ -2,42 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>8h15 Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>8h15 calculator</h2>
+<div class="page">
 
-  <input id="start" placeholder="Start" readonly onclick="openPicker('start')">
-  <input id="breakStart" placeholder="Break start" readonly onclick="openPicker('breakStart')">
-  <input id="breakEnd" placeholder="Back to work" readonly onclick="openPicker('breakEnd')">
+  <div class="container">
+    <h2>8h15 calculator</h2>
 
-  <p id="result"></p>
-</div>
+    <input id="start" placeholder="Start" readonly onclick="openPicker('start')">
+    <input id="breakStart" placeholder="Break start" readonly onclick="openPicker('breakStart')">
+    <input id="breakEnd" placeholder="Back to work" readonly onclick="openPicker('breakEnd')">
 
-<!-- 🔢 Custom keypad -->
-<div id="keypad" class="hidden">
-  <div id="display">--:--</div>
-
-  <div class="keys">
-    <button onclick="press(1)">1</button>
-    <button onclick="press(2)">2</button>
-    <button onclick="press(3)">3</button>
-    <button onclick="press(4)">4</button>
-    <button onclick="press(5)">5</button>
-    <button onclick="press(6)">6</button>
-    <button onclick="press(7)">7</button>
-    <button onclick="press(8)">8</button>
-    <button onclick="press(9)">9</button>
-    <button onclick="clearTime()">C</button>
-    <button onclick="press(0)">0</button>
-    <button onclick="confirm()">OK</button>
+    <p id="result"></p>
   </div>
-</div>
 
+  <!-- Keypad sits directly under container -->
+  <div id="keypad" class="hidden">
+    <div id="display">--:--</div>
+
+    <div class="keys">
+      <button onclick="press(1)">1</button>
+      <button onclick="press(2)">2</button>
+      <button onclick="press(3)">3</button>
+      <button onclick="press(4)">4</button>
+      <button onclick="press(5)">5</button>
+      <button onclick="press(6)">6</button>
+      <button onclick="press(7)">7</button>
+      <button onclick="press(8)">8</button>
+      <button onclick="press(9)">9</button>
+      <button onclick="clearTime()">C</button>
+      <button onclick="press(0)">0</button>
+      <button onclick="confirm()">OK</button>
+    </div>
+  </div>
+
+</div>
 
 <script src="script.js"></script>
 </body>

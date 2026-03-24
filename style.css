@@ -1,10 +1,11 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  overflow: hidden;
   background: linear-gradient(-45deg, #ff7eb3, #ff758c, #ff9a9e, #fad0c4);
   background-size: 400% 400%;
   animation: gradientMove 10s ease infinite;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* moving gradient */
@@ -39,21 +40,28 @@ body::after {
   100% { transform: translate(0,0); }
 }
 
+/* PAGE WRAPPER */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+}
+
 /* container */
 .container {
-  position: relative;
-  z-index: 1;
+  width: 380px;
+  max-width: 92vw;
   padding: 25px;
-  max-width: 380px;
-  margin: 60px auto;
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.2);
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
 h2 {
-  text-align: center;
   color: white;
   font-weight: 500;
 }
@@ -61,7 +69,7 @@ h2 {
 /* inputs */
 input {
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box; 
   padding: 18px;
   font-size: 20px;
   margin-top: 15px;
@@ -79,7 +87,6 @@ input:active {
 #result {
   margin-top: 25px;
   font-size: 24px;
-  text-align: center;
   font-weight: bold;
   color: white;
   opacity: 0;
@@ -92,22 +99,17 @@ input:active {
   transform: scale(1);
 }
 
-/* gradient ONLY for time */
 .time-gradient {
   background: linear-gradient(135deg, #845ec2, #d65db1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: inline-block;
 }
 
+/* KEYPAD */
 #keypad {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10px;
-
-  width: 380px;          /* SAME AS YOUR CONTAINER */
-  max-width: 92vw;       /* mobile safety */
+  width: 380px;
+  max-width: 92vw;
+  margin-top: 20px;
 
   background: rgba(255,255,255,0.95);
   border-radius: 20px;
@@ -115,14 +117,12 @@ input:active {
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 
   animation: slideUp 0.3s ease;
-  z-index: 9999;
 }
 
 .hidden {
   display: none;
 }
 
-/* display */
 #display {
   text-align: center;
   font-size: 28px;
@@ -147,22 +147,20 @@ input:active {
   transition: all 0.15s ease;
 }
 
-/* button press */
 .keys button:active {
   transform: scale(0.9);
   box-shadow: inset 0 3px 8px rgba(0,0,0,0.3);
 }
 
-/* OK button special */
+/* OK button */
 .keys button:last-child {
   background: linear-gradient(135deg, #845ec2, #d65db1);
   font-weight: bold;
 }
 
-/* animations */
 @keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* mobile tweaks */
@@ -178,11 +176,5 @@ input:active {
 
   input {
     font-size: 18px;
-  }
-}
-
-@media (max-width: 420px) {
-  #keypad {
-    width: 95vw;
   }
 }
