@@ -52,34 +52,6 @@ body::after {
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 
-/* 🔥 important fix */
-input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 18px;
-  font-size: 20px;
-  margin-top: 15px;
-  border-radius: 15px;
-  border: none;
-  text-align: center;
-}
-
-.keys button:last-child {
-  background: linear-gradient(135deg, #845ec2, #d65db1);
-  font-weight: bold;
-}
-
-/* make sure keypad is always on top and clickable */
-#keypad {
-  z-index: 9999;
-}
-
-/* ensure buttons are fully clickable */
-.keys button {
-  position: relative;
-  z-index: 1;
-}
-
 h2 {
   text-align: center;
   color: white;
@@ -89,6 +61,7 @@ h2 {
 /* inputs */
 input {
   width: 100%;
+  box-sizing: border-box;
   padding: 18px;
   font-size: 20px;
   margin-top: 15px;
@@ -102,28 +75,16 @@ input:active {
   transform: scale(0.97);
 }
 
+/* result */
 #result {
   margin-top: 25px;
   font-size: 24px;
   text-align: center;
   font-weight: bold;
-  color: white; /* keep it white */
+  color: white;
   opacity: 0;
   transform: scale(0.9);
   transition: all 0.3s ease;
-}
-
-.time-gradient {
-  background: linear-gradient(135deg, #845ec2, #d65db1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block; /* ensures proper clipping */
-}
-
-.time-gradient {
-  background: linear-gradient(135deg, #845ec2, #d65db1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 #result.show {
@@ -131,49 +92,69 @@ input:active {
   transform: scale(1);
 }
 
+/* gradient ONLY for time */
+.time-gradient {
+  background: linear-gradient(135deg, #845ec2, #d65db1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 /* keypad */
 #keypad {
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  max-width: 100%;
   background: rgba(255,255,255,0.95);
   border-radius: 20px 20px 0 0;
-  padding: 15px;
+  padding: 10px;
   box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
   animation: slideUp 0.3s ease;
+  z-index: 9999;
 }
 
 .hidden {
   display: none;
 }
 
+/* display */
 #display {
   text-align: center;
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 8px;
 }
 
-/* keys */
+/* keys grid */
 .keys {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 8px;
 }
 
+/* buttons */
 .keys button {
-  padding: 20px;
-  font-size: 22px;
+  padding: 14px;
+  font-size: 18px;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   background: linear-gradient(135deg, #ff6f91, #ff9671);
   color: white;
   transition: all 0.15s ease;
 }
 
-/* button press effect */
+/* button press */
 .keys button:active {
   transform: scale(0.9);
   box-shadow: inset 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* OK button special */
+.keys button:last-child {
+  background: linear-gradient(135deg, #845ec2, #d65db1);
+  font-weight: bold;
 }
 
 /* animations */
@@ -182,9 +163,18 @@ input:active {
   to { transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* mobile tweaks */
+@media (max-width: 400px) {
+  .keys button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  #display {
+    font-size: 24px;
+  }
+
+  input {
+    font-size: 18px;
+  }
 }
-
-
