@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  >
   <title>8h15 Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="page">
-
   <div class="container">
     <h2>8h15 calculator</h2>
 
@@ -20,7 +22,7 @@
     <p id="result"></p>
   </div>
 
-  <!-- Keypad sits directly under container -->
+  <!-- keypad directly under container, same width -->
   <div id="keypad" class="hidden">
     <div id="display">--:--</div>
 
@@ -39,7 +41,6 @@
       <button onclick="confirm()">OK</button>
     </div>
   </div>
-
 </div>
 
 <script src="script.js"></script>

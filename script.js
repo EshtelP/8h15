@@ -11,7 +11,7 @@ function openPicker(fieldId) {
 function press(num) {
   if (currentInput.length >= 4) return;
 
-  // ✅ only auto-add 0 for impossible first digits (3–9)
+  // auto-add 0 for impossible first digits (3–9)
   if (currentInput.length === 0 && num >= 3) {
     currentInput = "0" + num;
   } else {
@@ -20,11 +20,10 @@ function press(num) {
 
   updateDisplay();
 }
- 
 
 function updateDisplay() {
   let formatted = currentInput.padEnd(4, "_");
-  let display = formatted.slice(0,2) + ":" + formatted.slice(2,4);
+  let display = formatted.slice(0, 2) + ":" + formatted.slice(2, 4);
   document.getElementById("display").innerText = display;
 }
 
@@ -36,7 +35,7 @@ function clearTime() {
 function confirm() {
   if (currentInput.length !== 4) return;
 
-  let time = currentInput.slice(0,2) + ":" + currentInput.slice(2,4);
+  let time = currentInput.slice(0, 2) + ":" + currentInput.slice(2, 4);
   document.getElementById(activeField).value = time;
 
   document.getElementById("keypad").classList.add("hidden");
@@ -67,8 +66,11 @@ function calculate() {
   const endTime = toMinutes(breakEnd) + remaining;
 
   const result = document.getElementById("result");
-  result.innerHTML = '8h15 reached at <span class="time-gradient">' + toTime(endTime) + '</span>';
+  result.innerHTML =
+    '8h15 reached at <span class="time-gradient">' +
+    toTime(endTime) +
+    "</span>";
 
   result.classList.remove("show");
-  setTimeout(() => result.classList.add("show"), 50);
+  setTimeout(() => result.classList.add("show"), 30);
 }

@@ -1,11 +1,11 @@
+/* GLOBAL */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(-45deg, #ff7eb3, #ff758c, #ff9a9e, #fad0c4);
   background-size: 400% 400%;
   animation: gradientMove 10s ease infinite;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden; /* everything fits on one screen */
 }
 
 /* moving gradient */
@@ -20,12 +20,13 @@ body::before,
 body::after {
   content: "";
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 260px;
+  height: 260px;
   background: rgba(255,255,255,0.2);
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(70px);
   animation: float 12s infinite ease-in-out;
+  pointer-events: none;
 }
 
 body::after {
@@ -36,32 +37,37 @@ body::after {
 
 @keyframes float {
   0% { transform: translate(0,0); }
-  50% { transform: translate(50px, -60px); }
+  50% { transform: translate(40px, -40px); }
   100% { transform: translate(0,0); }
 }
 
-/* PAGE WRAPPER */
+/* PAGE LAYOUT: center everything, keep it tight */
 .page {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 30px 0;
+  justify-content: center;   /* vertical centering */
+  align-items: center;       /* horizontal centering */
+  gap: 10px;                 /* small gap between container and keypad */
+  padding: 10px 0;
 }
 
 /* container */
 .container {
-  width: 380px;
-  max-width: 92vw;
-  padding: 25px;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.2);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  width: 340px;
+  max-width: 90vw;
+  padding: 18px 18px 20px;
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.22);
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
   text-align: center;
 }
 
 h2 {
+  margin: 0 0 10px;
   color: white;
   font-weight: 500;
 }
@@ -69,29 +75,30 @@ h2 {
 /* inputs */
 input {
   width: 100%;
-  box-sizing: border-box; 
-  padding: 18px;
-  font-size: 20px;
-  margin-top: 15px;
-  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 14px;
+  font-size: 18px;
+  margin-top: 10px;
+  border-radius: 14px;
   border: none;
   text-align: center;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
+  background: rgba(255,255,255,0.9);
 }
 
 input:active {
-  transform: scale(0.97);
+  background: rgba(255,255,255,0.8);
 }
 
 /* result */
 #result {
-  margin-top: 25px;
-  font-size: 24px;
+  margin-top: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
   opacity: 0;
   transform: scale(0.9);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 #result.show {
@@ -107,26 +114,24 @@ input:active {
 
 /* KEYPAD */
 #keypad {
-  width: 380px;
-  max-width: 92vw;
-  margin-top: 20px;
-
-  background: rgba(255,255,255,0.95);
-  border-radius: 20px;
+  width: 340px;
+  max-width: 90vw;
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
   padding: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-
-  animation: slideUp 0.3s ease;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.3);
+  animation: fadeIn 0.2s ease;
 }
 
 .hidden {
   display: none;
 }
 
+/* display */
 #display {
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: 26px;
+  margin-bottom: 6px;
 }
 
 /* keys grid */
@@ -138,43 +143,52 @@ input:active {
 
 /* buttons */
 .keys button {
-  padding: 14px;
+  padding: 12px;
   font-size: 18px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #ff6f91, #ff9671);
   color: white;
-  transition: all 0.15s ease;
+  transition: background 0.1s ease, box-shadow 0.1s ease;
 }
 
+/* remove movement on touch */
 .keys button:active {
-  transform: scale(0.9);
-  box-shadow: inset 0 3px 8px rgba(0,0,0,0.3);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.25);
 }
 
-/* OK button */
+/* OK button special */
 .keys button:last-child {
   background: linear-gradient(135deg, #845ec2, #d65db1);
   font-weight: bold;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* mobile tweaks */
-@media (max-width: 400px) {
-  .keys button {
+@media (max-height: 700px) {
+  .container {
+    padding: 14px 14px 16px;
+  }
+
+  input {
     padding: 12px;
     font-size: 16px;
   }
 
   #display {
-    font-size: 24px;
+    font-size: 22px;
   }
 
-  input {
+  .keys button {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  #result {
     font-size: 18px;
   }
 }
