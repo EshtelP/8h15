@@ -100,18 +100,20 @@ input:active {
   display: inline-block;
 }
 
-/* keypad */
 #keypad {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+
+  width: 380px;          /* SAME AS YOUR CONTAINER */
+  max-width: 92vw;       /* mobile safety */
+
   background: rgba(255,255,255,0.95);
-  border-radius: 20px 20px 0 0;
+  border-radius: 20px;
   padding: 10px;
-  box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
   animation: slideUp 0.3s ease;
   z-index: 9999;
 }
@@ -176,5 +178,11 @@ input:active {
 
   input {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  #keypad {
+    width: 95vw;
   }
 }
